@@ -1,0 +1,100 @@
+.hospital-list-map-container {
+  width: 100%;
+  padding-top: 3rem;
+  margin-block-end: 5rem;
+}
+
+.hospital-list-iframe {
+  inline-size: 100%;
+  height: auto;
+}
+
+.no-of-hospitals-found {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem;
+}
+
+.hospitals-found-logos {
+  display: flex;
+  gap: 1rem;
+}
+.filter-hospital-result,
+.share-hospital-search-result,
+.download-hospital-details {
+  background-color: transparent;
+  cursor: pointer;
+  border: 1px solid transparent;
+  transition: border-color 1s ease-in;
+}
+
+.filter-hospital-result:hover,
+.share-hospital-search-result:hover,
+.download-hospital-details:hover {
+  border-color: blue;
+}
+
+.single-hospital-wrapper {
+  display: flex;
+  margin-inline: 1rem;
+  margin-block-end: 2.5rem;
+  gap: 20px;
+}
+
+.hospital-image-container {
+  height: 100%;
+}
+
+.hospital-image {
+  /* inline-size: 169px; */
+  height: 200px;
+  width: 200px;
+  border-radius: 10px;
+}
+
+.single-hospital-details {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.hospital-name {
+  width: fit-content;
+  cursor: pointer;
+  margin-block-end: 1rem;
+}
+
+.hospital-name:hover {
+  color: blue;
+}
+
+.hospital-socials {
+  display: flex;
+  gap: 0.5rem;
+  cursor: pointer;
+  margin-block-start: 0.5rem;
+}
+
+.hospital-intro {
+  text-wrap: balance;
+  /* margin-block-end: 4rem; */
+}
+
+@media (max-width: 820px) {
+  .single-hospital-wrapper {
+    gap: 1rem;
+    padding: 1rem;
+    margin-bottom: 20px;
+  }
+
+  .hospital-image-container {
+    height: 100%;
+  }
+  .hospital-image {
+    /* inline-size: 169px; */
+    height: 200px;
+    width: 200px;
+    border-radius: 10px;
+  }
+}

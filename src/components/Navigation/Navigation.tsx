@@ -57,15 +57,15 @@ function Navigation() {
               Contact us
             </NavLink>
           </li>
-          <button className="btn">Login</button>
+          <button className="btn">⏭️</button>
           <NavLink
             style={({ isActive }) =>
               isActive ? { color: "blue" } : { color: "#fff" }
             }
             className="navigate"
-            to="/signupform"
+            to=""
           >
-            <button className="btn">SignUp</button>
+            <button className="btn">Connect Wallet</button>
           </NavLink>
         </ul>
       </div>

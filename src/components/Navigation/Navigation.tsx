@@ -1,15 +1,49 @@
+// Navigation.js
 import careFinderLogo from "./careFinderLogo.png";
 import { NavLink } from "react-router-dom";
 import Hamburger from "hamburger-react";
 import { useState } from "react";
-import dropDownBtn from "./CaretDown.png";
+
+import CoinbaseWalletSDK from "@coinbase/wallet-sdk";
+import { ethers } from "ethers";
 import "./Navigation.css";
 
 function Navigation() {
-  const [hamburgerIsOpen, sethamburgerIsOpen] = useState(false);
-  //creating a function for toggling the nav on a smaller screen
+  const [hamburgerIsOpen, setHamburgerIsOpen] = useState(false);
+  const [walletConnected, setWalletConnected] = useState(false);
+  const [walletAddress, setWalletAddress] = useState('');
+
+  // Coinbase Wallet configuration
+  const APP_NAME = 'CareFinder';
+  const APP_LOGO_URL = careFinderLogo;
+  const ETH_JSONRPC_URL = 'https://mainnet.infura.io/v3/YOUR_INFURA_PROJECT_ID'; // Replace with your Infura or other RPC URL
+  const CHAIN_ID = 1; // Ethereum mainnet
+
+  // Initialize Coinbase Wallet SDK
+  const coinbaseWallet = new CoinbaseWalletSDK({
+    appName: APP_NAME,
+    appLogoUrl: APP_LOGO_URL,
+    darkMode: false,
+  });
+
+  // Wallet provider
+  const ethereum = coinbaseWallet.makeWeb3Provider(ETH_JSONRPC_URL, CHAIN_ID);
+
+  // Connect Wallet Handler
+  const connectWallet = async () => {
+    try {
+      const accounts = await ethereum.request({ method: 'eth_requestAccounts' });
+      const account = accounts[0];
+      setWalletConnected(true);
+      setWalletAddress(account);
+    } catch (error) {
+      console.error("Wallet connection failed", error);
+    }
+  };
+
+  // Toggle hamburger menu
   const handleHamburgerToggle = () => {
-    sethamburgerIsOpen(!hamburgerIsOpen);
+    setHamburgerIsOpen(!hamburgerIsOpen);
   };
 
   return (
@@ -27,12 +61,8 @@ function Navigation() {
               className="navigate"
               to="/resources"
             >
-              Resources
-              <img
-                src={dropDownBtn}
-                alt="dropDownBtn"
-                className="dropdown-btn"
-              />
+             
+             
             </NavLink>
           </li>
           <li>
@@ -43,7 +73,7 @@ function Navigation() {
               className="navigate"
               to="/about"
             >
-              About
+              
             </NavLink>
           </li>
           <li>
@@ -54,19 +84,22 @@ function Navigation() {
               className="navigate"
               to="/contact"
             >
-              Contact us
+              
             </NavLink>
           </li>
-          <button className="btn">⏭️</button>
-          <NavLink
-            style={({ isActive }) =>
-              isActive ? { color: "blue" } : { color: "#fff" }
-            }
-            className="navigate"
-            to=""
-          >
-            <button className="btn">Connect Wallet</button>
-          </NavLink>
+          <button className=""></button>
+          <li>
+            <button
+              onClick={connectWallet}
+              className="btn bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+            >
+              {walletConnected ? (
+                <span>Connected: {walletAddress.slice(0, 6)}...{walletAddress.slice(-4)}</span>
+              ) : (
+                "Connect Wallet"
+              )}
+            </button>
+          </li>
         </ul>
       </div>
       <div
@@ -74,7 +107,7 @@ function Navigation() {
         onClick={handleHamburgerToggle}
         aria-label="Toggle Menu"
       >
-        <Hamburger />
+        <Hamburger toggled={hamburgerIsOpen} toggle={setHamburgerIsOpen} />
       </div>
     </div>
   );

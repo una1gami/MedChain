@@ -16,7 +16,7 @@ function Navigation() {
   // Coinbase Wallet configuration
   const APP_NAME = 'CareFinder';
   const APP_LOGO_URL = careFinderLogo;
-  const ETH_JSONRPC_URL = 'https://mainnet.infura.io/v3/YOUR_INFURA_PROJECT_ID'; // Replace with your Infura or other RPC URL
+  const ETH_JSONRPC_URL = 'https://base-mainnet.infura.io/v3/e6a7b986538a4fe3a15a308166bda32b'; // Replace with your Infura or other RPC URL
   const CHAIN_ID = 1; // Ethereum mainnet
 
   // Initialize Coinbase Wallet SDK
